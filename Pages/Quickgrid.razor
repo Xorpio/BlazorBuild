@@ -1,4 +1,5 @@
 ﻿@using Microsoft.AspNetCore.Components.QuickGrid
+@using MatBlazor
 @page "/quickgrid"
 
 <h3>quickgrid</h3>p
@@ -16,6 +17,9 @@ else
     <QuickGrid Class="border-collapse border border-solid border-slate-400" Items="@Accounts">
         <PropertyColumn Class="border border-solid border-slate-300" Property="@(a => a.Firstname)" Title="Voornaam"></PropertyColumn>
         <PropertyColumn Class="border border-solid border-slate-300" Property="@(a => a.Lastname)" Title="Achternaam"></PropertyColumn>
+        <TemplateColumn Class="border border-solid border-slate-300">
+            <MatIconButton Link="@($"/Users/Edit/{context.Id}")" Icon="edit"></MatIconButton>
+        </TemplateColumn>
     </QuickGrid>
 }
 
