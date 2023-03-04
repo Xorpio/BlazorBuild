@@ -1,0 +1,38 @@
+﻿<h3>quickgrid</h3>p
+
+@if (Accounts == null)
+{
+    <p>Loading...</p>
+}
+else if (!Accounts.Any())
+{
+    <p>No users found</p>
+}
+else
+{
+    <QuickGrid Class="border-collapse border border-solid border-slate-400" Items="@Accounts">
+        <PropertyColumn Class="border border-solid border-slate-300" Property="@(a => a.Firstname)" Title="Voornaam"></PropertyColumn>
+        <PropertyColumn Class="border border-solid border-slate-300" Property="@(a => a.Lastname)" Title="Achternaam"></PropertyColumn>
+        <TemplateColumn Class="border border-solid border-slate-300">
+            <MatIconButton Link="@($"/Users/Edit/{context.Id}")" Icon="edit"></MatIconButton>
+        </TemplateColumn>
+    </QuickGrid>
+}
+
+@code {
+    public IQueryable<Account>? Accounts;
+
+    protected override void OnParametersSet()
+    {
+        var accounts = new List<Account>();
+        Accounts = accounts.AsQueryable();
+    }
+
+    public class Account
+    {
+        public string Firstname { get; set; }
+        public string Lastname { get; set; }
+        public Guid Id { get; set; }
+    }
+
+}
